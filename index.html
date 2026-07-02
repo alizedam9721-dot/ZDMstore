@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ZDM Store</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Cairo', sans-serif; }
+        body { background-color: #121212; color: #ffffff; line-height: 1.6; text-align: right; }
+        header { background-color: #1a1a1a; text-align: center; padding: 25px 20px; border-bottom: 3px solid #e50914; }
+        
+        .logo-box-fixed { display: flex; direction: ltr; justify-content: center; align-items: center; gap: 5px; margin: 0 auto; font-style: italic; width: 100%; max-width: 320px; }
+        .letter-fixed { font-size: 3.5rem; font-weight: 900; color: #ffffff; line-height: 1; display: block; }
+        .letter-d-bolt { font-size: 3.5rem; font-weight: 900; color: #ffffff; line-height: 1; position: relative; display: inline-block; margin: 0 4px; }
+        .letter-d-bolt::after { content: ''; position: absolute; top: -5px; left: 8px; width: 0; height: 0; border-left: 12px solid transparent; border-right: 24px solid #e50914; border-bottom: 36px solid transparent; transform: skewX(-20deg); filter: drop-shadow(0 0 8px #e50914); }
+        
+        .store-tag { font-size: 1.3rem; font-weight: 900; color: #e50914; letter-spacing: 4px; text-transform: uppercase; margin-top: 5px; margin-bottom: 5px; text-align: center; }
+        header p { font-size: 1rem; color: #cccccc; text-align: center; }
+        
+        .main-container { max-width: 1000px; margin: 0 auto; padding: 20px; }
+        .products-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; justify-content: center; width: 100%; }
+        
+        .fixed-product-card { background: #1e1e1e; border-radius: 12px; overflow: hidden; border: 1px solid #2a2a2a; box-shadow: 0 4px 15px rgba(0,0,0,0.5); display: flex; flex-direction: column; padding: 20px; margin: 15px auto; width: 100%; max-width: 290px; align-items: center; }
+        .fixed-product-title { font-size: 1.2rem; font-weight: 700; color: #ffffff; margin-bottom: 12px; border-bottom: 1px solid #2a2a2a; padding-bottom: 6px; text-align: center; width: 100%; }
+        
+        .fixed-product-img { width: 100%; height: 210px; object-fit: contain; border-radius: 8px; background: #121212; margin-bottom: 10px; display: block; }
+        .fixed-product-price { font-size: 1.4rem; font-weight: 900; color: #e50914; text-align: center; margin: 5px 0 15px 0; }
+        
+        .order-btn { display: block; background: #e50914; color: white; text-align: center; padding: 12px; border-radius: 6px; font-size: 1rem; font-weight: bold; text-decoration: none; box-shadow: 0 4px 10px rgba(229,9,20,0.3); width: 100%; margin-top: auto; }
+        
+        footer { text-align: center; padding: 20px; color: #666; font-size: 0.8rem; margin-top: 40px; border-top: 1px solid #2a2a2a; }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo-box-fixed">
+            <span class="letter-fixed">Z</span>
+            <span class="letter-d-bolt">D</span>
+            <span class="letter-fixed">M</span>
+        </div>
+        <div class="store-tag">STORE</div>
+        <p>تصفح أحدث المنتجات واطلب مباشرة عبر الواتساب ⚡</p>
+    </header>
+
+    <div class="main-container">
+        <div id="products-list" class="products-grid">
+            <!-- السلعة تخرج هنا تلقائياً -->
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 ZDM Store - جميع الحقوق محفوظة</p>
+    </footer>
+
+    <!-- ربط ملف السلعة الخارجي -->
+    <script src="products.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            var container = document.getElementById('products-list');
+            if(typeof myProducts !== 'undefined') {
+                myProducts.forEach(prod => {
+                    var card = document.createElement('div');
+                    card.className = 'fixed-product-card';
+                    card.innerHTML = `
+                        <h2 class="fixed-product-title">${prod.name}</h2>
+                        <img src="${prod.image}" class="fixed-product-img" alt="${prod.name}"/>
+                        <div class="fixed-product-price">${prod.price}</div>
+                        <a href="https://wa.me/213664962613?text=سلام عليكم زدام ستور باغي نطلب: ${encodeURIComponent(prod.name)}" class="order-btn" target="_blank">📲 اطلب الآن عبر الواتساب</a>
+                    `;
+                    container.appendChild(card);
+                });
+            }
+        });
+    </script>
+</body>
+</html>
