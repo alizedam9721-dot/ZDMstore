@@ -1,4 +1,4 @@
-var products = [
+const products = [
   {
     "name": "مجموعة أساور ذهبية راقية (Acier Inoxydable)",
     "price": "2500 دج",
